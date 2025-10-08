@@ -29,5 +29,10 @@
 		"typescript": "^5.9.2",
 		"vite": "^7.1.7",
 		"vite-plugin-devtools-json": "^1.0.0"
+	},
+	"dependencies": {
+		"daisyui": "^5.1.29",
+		"gsap": "^3.13.0",
+		"lucide-svelte": "^0.545.0"
 	}
 }
