@@ -12,6 +12,6 @@
 <TopbarItem classes="">
 	<span>{currentTime}</span>
 </TopbarItem>
-<TopbarItem classes="right-0">
-	<span>Hello</span>
+<TopbarItem classes="left-1/2 -translate-x-1/2">
+	<span>Nils Schlegel - Portfolio (in development)</span>
 </TopbarItem>
