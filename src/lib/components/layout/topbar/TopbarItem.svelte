@@ -9,6 +9,6 @@
 	let { classes, children }: TopBarProps = $props();
 </script>
 
-<div class="fixed top-0 rounded-b-xl bg-base-200/70 p-2 {classes}">
+<div class="fixed top-0 rounded-b-xl bg-base-200/70 p-2 select-none {classes}">
 	{@render children()}
 </div>
