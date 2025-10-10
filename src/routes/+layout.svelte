@@ -41,9 +41,11 @@
 	<meta name="robots" content="index, follow">
 	<meta name="language" content="English">
 	<meta name="author" content="Nils Schlegel">
+	<meta name="apple-mobile-web-app-capable" content="yes" />
 
 	<link rel="manifest" href={manifest} />
 	<link rel="icon" href={favicon} />
+	<link rel="apple-touch-icon" href={favicon} />
 </svelte:head>
 
 <div
