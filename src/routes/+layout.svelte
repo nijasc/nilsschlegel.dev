@@ -27,6 +27,14 @@
 </script>
 
 <svelte:head>
+	<title>Nils Schlegel - Portfolio</title>
+	<meta name="title" content="Nils Schlegel - Portfolio">
+	<meta name="description" content="Explore a ArchLinux Desktop themed portfolio. Fully designed and implemented by Nils Schlegel using SvelteKit. The whole experience is open source, so you can see my code!">
+	<meta name="keywords" content="portfolio, nils schlegel, nils, schlegel, arch, arch linux, desktop">
+	<meta name="robots" content="index, follow">
+	<meta name="language" content="English">
+	<meta name="author" content="Nils Schlegel">
+
 	<link rel="icon" href={favicon} />
 </svelte:head>
 
