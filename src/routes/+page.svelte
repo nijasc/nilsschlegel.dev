@@ -8,9 +8,9 @@
 
 	let currentProps: DefaultAppProps | null = $state(null);
 
-	function handleAppchange(application: Application | null) {
+	function handleAppChange(application: Application | null) {
 		if (currentApp?.name === application?.name) {
-			handleAppchange(null);
+			handleAppChange(null);
 			return;
 		}
 		currentApp = application;
@@ -26,11 +26,11 @@
 	}
 
 	function handleClose() {
-		handleAppchange(null);
+		handleAppChange(null);
 	}
 
 	function handleMinimize() {
-		handleAppchange(null);
+		handleAppChange(null);
 	}
 </script>
 
@@ -43,4 +43,4 @@
 	</div>
 {/if}
 
-<Toolbar onAppChange={(app) => handleAppchange(app)} />
+<Toolbar onAppChange={(app) => handleAppChange(app)} />
