@@ -8,7 +8,7 @@
 	const ACTION_SIZE = 16;
 </script>
 
-<div class="h-full w-full rounded-lg bg-base-100/90">
+<div class="h-full w-full rounded-t-lg">
 	<div class="flex flex-row justify-between rounded-t-lg bg-primary/90 p-2">
 		<div class="pl-1">
 			<span>{props.application.name}</span>
@@ -28,7 +28,7 @@
 			</button>
 		</div>
 	</div>
-	<div class="h-full w-full">
+	<div class="h-full bg-base-100/90 rounded-b-lg w-full">
 		{@render children()}
 	</div>
 </div>

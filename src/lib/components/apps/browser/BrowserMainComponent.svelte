@@ -12,7 +12,7 @@
 	let historyIndex: number = $state(-1);
 	let searchInput: string = $state('');
 	let forwardEnabled: boolean = $state(false);
-	let notFound: boolean = $state(false);
+	let notFound: { active: boolean, text: string } = $state({ active: false, text: ''});
 	let backEnabled: boolean = $state(false);
 
 	function handleTabChange(page: Page | null) {
@@ -44,7 +44,7 @@
 
 	function handleSearch() {
 		for (const page of pages) {
-			notFound = false;
+            notFound = {active: false, text: ``};
 			if (
 				page.link.toLocaleLowerCase() === searchInput.toLocaleLowerCase() ||
 				page.name.toLocaleLowerCase() === searchInput.toLocaleLowerCase()
@@ -53,7 +53,7 @@
 			} else if (searchInput === ('')) {
 				handleTabChange(null);
 			} else {
-				notFound = true;
+				notFound = {active: true, text: `Could not find ${searchInput}`};
 				handleTabChange(null);
 			}
 		}
@@ -144,10 +144,10 @@
 				{#if currentPage}
 					{@const Content = currentPage.content}
 					<Content />
-				{:else if notFound}
+				{:else if notFound.active}
 					<div class="prose max-w-none text-base-content/70">
 						<h3>Not Found!</h3>
-						<p>Could not find page {searchInput}, try the following options:</p>
+						<p>Could not find page {notFound.text}, try the following options:</p>
 						<ul>
 							<li>Click a tab from above</li>
 							<li>Enter the name or address of a page and try again</li>
