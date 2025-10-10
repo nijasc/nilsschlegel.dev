@@ -38,7 +38,7 @@
 
 {#if currentApp}
 	{@const App = currentApp.component}
-	<div class="h-full overflow-y-hidden w-full px-4 pt-12 pb-20">
+	<div class="h-full overflow-y-hidden w-full px-4 pt-12 pb-32">
 		<App props={currentProps} />
 	</div>
 {/if}
