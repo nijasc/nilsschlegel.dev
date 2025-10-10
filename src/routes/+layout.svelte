@@ -1,6 +1,8 @@
 <script lang="ts">
 	import '../app.css';
 	import favicon from '$lib/assets/favicon.svg';
+	import manifest from '$lib/config/manifest.json';
+
 	import backgroundLight from '$lib/assets/background-light.jpg';
 	import backgroundDark from '$lib/assets/background-dark.jpg';
 
@@ -40,6 +42,7 @@
 	<meta name="language" content="English">
 	<meta name="author" content="Nils Schlegel">
 
+	<link rel="manifest" href={manifest} />
 	<link rel="icon" href={favicon} />
 </svelte:head>
 
