@@ -12,6 +12,7 @@
 	let historyIndex: number = $state(-1);
 	let searchInput: string = $state('');
 	let forwardEnabled: boolean = $state(false);
+	let notFound: boolean = $state(false);
 	let backEnabled: boolean = $state(false);
 
 	function handleTabChange(page: Page | null) {
@@ -43,11 +44,17 @@
 
 	function handleSearch() {
 		for (const page of pages) {
+			notFound = false;
 			if (
 				page.link.toLocaleLowerCase() === searchInput.toLocaleLowerCase() ||
 				page.name.toLocaleLowerCase() === searchInput.toLocaleLowerCase()
 			) {
 				handleTabChange(page);
+			} else if (searchInput === ('')) {
+				handleTabChange(null);
+			} else {
+				notFound = true;
+				handleTabChange(null);
 			}
 		}
 	}
@@ -103,7 +110,11 @@
 				<input
 					class="input-bordered input input-sm w-full"
 					type="text"
-					onkeydown={(event) => (event.key == 'Enter' ? () => handleSearch() : () => {})}
+					onkeydown={(event) => {
+    if (event.key === 'Enter') {
+      handleSearch();
+    }
+  }}
 					bind:value={searchInput}
 					placeholder="Search or enter address"
 				/>
@@ -133,6 +144,15 @@
 				{#if currentPage}
 					{@const Content = currentPage.content}
 					<Content />
+				{:else if notFound}
+					<div class="prose max-w-none text-base-content/70">
+						<h3>Not Found!</h3>
+						<p>Could not find page {searchInput}, try the following options:</p>
+						<ul>
+							<li>Click a tab from above</li>
+							<li>Enter the name or address of a page and try again</li>
+						</ul>
+					</div>
 				{:else}
 					<div class="prose max-w-none text-base-content/70">
 						<h3>Welcome</h3>
