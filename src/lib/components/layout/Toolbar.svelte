@@ -10,7 +10,7 @@
 </script>
 
 <div
-	class="fixed bottom-0 left-1/2 flex -translate-x-1/2 flex-row space-x-2 rounded-t-xl bg-base-200/70 p-2"
+	class="fixed justify-center md:w-fit w-screen bottom-0 left-1/2 flex -translate-x-1/2 flex-row space-x-2 rounded-t-xl bg-base-200/70 p-2"
 >
 	{#each apps as application (application.name)}
 		<button

@@ -14,9 +14,11 @@
 <TopbarItem classes="left-0">
 	<span>{currentTime}</span>
 </TopbarItem>
-<TopbarItem classes="left-1/2 -translate-x-1/2">
-	<span>Nils Schlegel - Portfolio (in development)</span>
-</TopbarItem>
+<div class="hidden md:block">
+	<TopbarItem classes="left-1/2 -translate-x-1/2">
+		<span>Nils Schlegel - Portfolio (in development)</span>
+	</TopbarItem>
+</div>
 <TopbarItem classes="right-0 w-22 flex flex-row space-x-2">
 	<BatteryFull />
 	<span>100%</span>
