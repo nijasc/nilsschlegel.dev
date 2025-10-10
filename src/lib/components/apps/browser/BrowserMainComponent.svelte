@@ -83,7 +83,7 @@
 </script>
 
 <DefaultAppComponent {props}>
-	<div class="flex h-full max-h-full w-full flex-col bg-base-100">
+	<div class="flex h-full w-full flex-col">
 		<div class="sticky top-10 z-30 border-b border-base-300 bg-base-100/95 px-3 py-2 backdrop-blur">
 			<div class="flex items-center gap-2">
 				<div class="join">
