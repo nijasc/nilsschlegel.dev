@@ -10,7 +10,7 @@
 
 <div class="h-full w-full rounded-lg bg-base-100/90">
 	<div class="flex flex-row justify-between rounded-t-lg bg-primary/90 p-2">
-		<div>
+		<div class="pl-1">
 			<span>{props.application.name}</span>
 		</div>
 		<div class="flex flex-row space-x-1">
@@ -28,5 +28,7 @@
 			</button>
 		</div>
 	</div>
-	{@render children()}
+	<div class="h-full w-full">
+		{@render children()}
+	</div>
 </div>
