@@ -1,5 +1,5 @@
 export interface Page {
-    name: string;
-    link: string;
-    content: any;
+	name: string;
+	link: string;
+	content: any;
 }
