@@ -15,7 +15,7 @@
 	{#each apps as application (application.name)}
 		<button
 			onclick={() => handleAppOpen(application)}
-			class="tooltip cursor-pointer rounded-xl bg-primary p-4"
+			class="tooltip cursor-pointer rounded-xl bg-base-100 p-4"
 			data-tip={application.name}
 		>
 			{#if true}

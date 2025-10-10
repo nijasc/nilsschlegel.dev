@@ -3,5 +3,5 @@
 @plugin '@tailwindcss/typography';
 
 @plugin 'daisyui' {
-	themes: black --default;
+	themes: all;
 }

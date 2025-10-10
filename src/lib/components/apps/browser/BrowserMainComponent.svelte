@@ -44,12 +44,13 @@
 
 	function handleSearch() {
 		for (const page of pages) {
-            notFound = {active: false, text: ``};
+			notFound = {active: false, text: ``};
 			if (
 				page.link.toLocaleLowerCase() === searchInput.toLocaleLowerCase() ||
 				page.name.toLocaleLowerCase() === searchInput.toLocaleLowerCase()
 			) {
 				handleTabChange(page);
+				return;
 			} else if (searchInput === ('')) {
 				handleTabChange(null);
 			} else {
@@ -108,7 +109,7 @@
 					</button>
 				</div>
 				<input
-					class="input-bordered input input-sm w-full"
+					class="focus:border-primary focus:outline-none border input input-sm w-full"
 					type="text"
 					onkeydown={(event) => {
     if (event.key === 'Enter') {

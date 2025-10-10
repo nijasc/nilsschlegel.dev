@@ -8,6 +8,9 @@
 	import { onMount } from 'svelte';
 	import { Theme } from '$lib/type/Theme';
 
+	const LIGHT_CLASS = 'corporate';
+	const DARK_CLASS = 'business';
+
 	let background = $state();
 
 	onMount(() => {
@@ -18,8 +21,10 @@
 	function applyTheme() {
 		if (themeStore.getTheme() == Theme.LIGHT) {
 			background = backgroundLight;
+			document.documentElement.setAttribute('data-theme', LIGHT_CLASS)
 		} else {
 			background = backgroundDark;
+			document.documentElement.setAttribute('data-theme', DARK_CLASS)
 		}
 	}
 

@@ -9,7 +9,7 @@
 </script>
 
 <div class="h-full w-full rounded-t-lg">
-	<div class="flex flex-row justify-between rounded-t-lg bg-primary/90 p-2">
+	<div class="flex flex-row justify-between rounded-t-lg bg-base-100 p-2">
 		<div class="pl-1">
 			<span>{props.application.name}</span>
 		</div>
