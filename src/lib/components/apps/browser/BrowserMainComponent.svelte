@@ -12,7 +12,7 @@
 	let historyIndex: number = $state(-1);
 	let searchInput: string = $state('');
 	let forwardEnabled: boolean = $state(false);
-	let notFound: { active: boolean, text: string } = $state({ active: false, text: ''});
+	let notFound: { active: boolean; text: string } = $state({ active: false, text: '' });
 	let backEnabled: boolean = $state(false);
 
 	function handleTabChange(page: Page | null) {
@@ -44,17 +44,17 @@
 
 	function handleSearch() {
 		for (const page of pages) {
-			notFound = {active: false, text: ``};
+			notFound = { active: false, text: `` };
 			if (
 				page.link.toLocaleLowerCase() === searchInput.toLocaleLowerCase() ||
 				page.name.toLocaleLowerCase() === searchInput.toLocaleLowerCase()
 			) {
 				handleTabChange(page);
 				return;
-			} else if (searchInput === ('')) {
+			} else if (searchInput === '') {
 				handleTabChange(null);
 			} else {
-				notFound = {active: true, text: `Could not find ${searchInput}`};
+				notFound = { active: true, text: `Could not find ${searchInput}` };
 				handleTabChange(null);
 			}
 		}
@@ -109,13 +109,13 @@
 					</button>
 				</div>
 				<input
-					class="focus:border-primary focus:outline-none border input input-sm w-full"
+					class="input input-sm w-full border focus:border-primary focus:outline-none"
 					type="text"
 					onkeydown={(event) => {
-    if (event.key === 'Enter') {
-      handleSearch();
-    }
-  }}
+						if (event.key === 'Enter') {
+							handleSearch();
+						}
+					}}
 					bind:value={searchInput}
 					placeholder="Search or enter address"
 				/>

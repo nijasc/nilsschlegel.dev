@@ -34,6 +34,7 @@ A clean, fast-loading portfolio optimized for readability, accessibility, and sm
 This repository contains the source code for my personal portfolio. It highlights work, writing, and experiments in a focused layout with thoughtful animations and robust dark/light theme support.
 
 Key qualities:
+
 - Fast by default: minimal JS, image optimization, and route-level code splitting
 - Accessible: semantic markup, keyboard friendly interactions, and contrast checked colors
 - Maintainable: clear structure, typed endpoints, and a small, well chosen toolkit
@@ -72,6 +73,7 @@ Visit http://localhost:5173 (or the URL shown in your terminal).
 ## Contributing
 
 Contributions are welcome. If you are proposing a notable change, open an issue first to discuss the approach. For pull requests:
+
 - Keep changes focused and documented
 - Follow existing code style and conventions
 - Include before/after context for UI changes (screens or gifs)

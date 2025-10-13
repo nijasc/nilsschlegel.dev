@@ -1,13 +1,13 @@
 {
-  "name": "Nils Schlegel - Portfolio",
-  "short_name": "Nils Schlegel",
-  "start_url": "/",
-  "display": "standalone",
-  "icons": [
-    {
-      "src": "/favicon.svg",
-      "sizes": "any",
-      "type": "image/svg+xml"
-    }
-  ]
+	"name": "Nils Schlegel - Portfolio",
+	"short_name": "Nils Schlegel",
+	"start_url": "/",
+	"display": "standalone",
+	"icons": [
+		{
+			"src": "/favicon.svg",
+			"sizes": "any",
+			"type": "image/svg+xml"
+		}
+	]
 }
