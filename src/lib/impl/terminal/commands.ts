@@ -7,11 +7,10 @@ type Social = {
 };
 
 const socialsData: ReadonlyArray<Social> = [
-	{ id: 'gh', label: 'GitHub', url: 'https://github.com/your-username' },
-	{ id: 'li', label: 'LinkedIn', url: 'https://www.linkedin.com/in/your-username' },
-	{ id: 'tw', label: 'Twitter', url: 'https://twitter.com/your-username' },
-	{ id: 'ig', label: 'Instagram', url: 'https://instagram.com/your-username' },
-	{ id: 'em', label: 'Email', url: 'mailto:you@example.com' }
+	{ id: 'gh', label: 'GitHub', url: 'https://github.com/nijasc' },
+	{ id: 'li', label: 'LinkedIn', url: 'https://www.linkedin.com/in/nils-schlegel-470527382/' },
+	{ id: 'ig', label: 'Instagram', url: 'https://instagram.com/nils_503' },
+	{ id: 'em', label: 'Email', url: 'mailto:me@nilsschlegel.dev' }
 ] as const;
 
 const pad = (s: string, n: number): string => s.padEnd(n, ' ');
@@ -98,14 +97,14 @@ export const socialsCommand: TerminalCommand = {
 			pad('id', idW) + pad('name', labelW) + 'url',
 			...socialsData.map((s) => `${pad(s.id, idW)}${pad(s.label, labelW)}${s.url}`)
 		];
-		return lines.join('\n');
+		return lines.join('\n') + '\nUse ' + socialsGotoCommand.usage + ' for example: social_goto gh';
 	}
 };
 
 export const socialsGotoCommand: TerminalCommand = {
-	name: 'socials goto',
+	name: 'social_goto',
 	description: 'Open a social link by id or name',
-	usage: 'socials goto gh | socials goto github',
+	usage: 'social_goto <SOCIAL_ID> | socials goto <SOCIAL_NAME>',
 	handler: (args) => {
 		const q = args.join(' ').trim().toLowerCase();
 		if (!q) return 'usage: socials goto <id|name>';
@@ -116,22 +115,6 @@ export const socialsGotoCommand: TerminalCommand = {
 		if (!match) return `not found: ${q}`;
 		return openUrl(match.url);
 	}
-};
-
-export const asciiCommand: TerminalCommand = {
-	name: 'ascii',
-	description: 'Show an ascii banner',
-	usage: 'ascii',
-	handler: () =>
-		[
-			'  ___      ___  ________  ________ ',
-			' |\\  \\    /  /||\\   __  \\|\\   __  \\',
-			' \\ \\  \\  /  / /\\ \\  \\|\\  \\ \\  \\|\\  \\',
-			'  \\ \\  \\/  / /  \\ \\   __  \\ \\   _  _\\',
-			'   \\ \\    / /    \\ \\  \\ \\  \\ \\  \\\\  \\|',
-			'    \\ \\__/ /      \\ \\__\\ \\__\\ \\__\\\\ _\\',
-			'     \\|__|/        \\|__|\\|__|\\|__|\\|__|'
-		].join('\n')
 };
 
 export const aboutCommand: TerminalCommand = {
@@ -197,51 +180,17 @@ export const skillsCommand = (skills: ReadonlyArray<string>): TerminalCommand =>
 	}
 });
 
-export const themeCommand = (
-	setTheme: (t: 'light' | 'dark' | 'system') => void
-): TerminalCommand => ({
+export const themeCommand = (setTheme: (t: 'light' | 'dark') => void): TerminalCommand => ({
 	name: 'theme',
 	description: 'Set theme light dark or system',
 	usage: 'theme dark',
 	handler: (args) => {
 		const v = (args[0] ?? '').toLowerCase();
-		if (v !== 'light' && v !== 'dark' && v !== 'system') return 'usage: theme <light|dark|system>';
+		if (v !== 'light' && v !== 'dark') return 'usage: theme <light|dark>';
 		setTheme(v);
 		return `theme set to: ${v}`;
 	}
 });
-
-export const jokeCommand: TerminalCommand = {
-	name: 'joke',
-	description: 'Print a short clean joke',
-	usage: 'joke',
-	handler: () => {
-		const jokes: ReadonlyArray<string> = [
-			'why do programmers prefer dark mode it saves energy and eyes',
-			'i would tell you a udp joke but you might not get it',
-			'there are 10 types of people those who understand binary and those who do not',
-			'debugging is like being the detective in a crime movie where you are also the murderer'
-		];
-		const i = Math.floor(Math.random() * jokes.length);
-		return jokes[i];
-	}
-};
-
-export const fortuneCommand: TerminalCommand = {
-	name: 'fortune',
-	description: 'Get a tiny fortune',
-	usage: 'fortune',
-	handler: () => {
-		const items: ReadonlyArray<string> = [
-			'a small change will spark a big idea',
-			'consistency beats intensity',
-			'clean code invites happy bugs to leave',
-			'seek clarity then speed'
-		];
-		const i = Math.floor(Math.random() * items.length);
-		return items[i];
-	}
-};
 
 export const pingCommand: TerminalCommand = {
 	name: 'ping',
@@ -266,12 +215,4 @@ export const calcCommand: TerminalCommand = {
 			return 'invalid expression';
 		}
 	}
-};
-
-export const bannerCommand: TerminalCommand = {
-	name: 'banner',
-	description: 'Show welcome banner',
-	usage: 'banner',
-	handler: () =>
-		[fmtTitle('welcome'), 'type help to see all commands', 'try socials or projects'].join('\n')
 };

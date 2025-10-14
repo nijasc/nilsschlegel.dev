@@ -1,3 +1,5 @@
+import { themeStore } from '$lib/store/themeStore';
+import { Theme } from '$lib/type/Theme';
 import type { TerminalOptions } from '$lib/type/terminal/TerminalOptions';
 import { TerminalCore } from './TerminalCore';
 import {
@@ -9,17 +11,13 @@ import {
 	whoamiCommand,
 	socialsCommand,
 	socialsGotoCommand,
-	asciiCommand,
 	aboutCommand,
 	timeCommand,
 	projectsCommand,
 	skillsCommand,
 	themeCommand,
-	jokeCommand,
-	fortuneCommand,
 	pingCommand,
-	calcCommand,
-	bannerCommand
+	calcCommand
 } from './commands';
 
 type Project = { name: string; url: string; desc: string };
@@ -29,13 +27,21 @@ export const createTerminal = (
 		socials?: ReadonlyArray<{ id: string; label: string; url: string }>;
 		projects?: ReadonlyArray<Project>;
 		skills?: ReadonlyArray<string>;
-		setTheme?: (t: 'light' | 'dark' | 'system') => void;
+		setTheme?: (t: 'light' | 'dark') => void;
 	}
 ) => {
 	const core = new TerminalCore(opts);
 	const projects = opts?.projects ?? [];
 	const skills = opts?.skills ?? [];
-	const setTheme = opts?.setTheme ?? (() => {});
+	const setTheme =
+		opts?.setTheme ??
+		((theme) => {
+			if (theme === 'dark') {
+				themeStore.setTheme(Theme.DARK);
+			} else {
+				themeStore.setTheme(Theme.LIGHT);
+			}
+		});
 
 	core.register(helpCommand(() => core.listCommands()));
 	core.register(echoCommand);
@@ -48,17 +54,13 @@ export const createTerminal = (
 		})
 	);
 
-	core.register(bannerCommand);
-	core.register(asciiCommand);
 	core.register(aboutCommand);
 	core.register(timeCommand);
 	core.register(pingCommand);
-	core.register(jokeCommand);
-	core.register(fortuneCommand);
 	core.register(calcCommand);
 
-	core.register(socialsCommand);
 	core.register(socialsGotoCommand);
+	core.register(socialsCommand);
 
 	core.register(projectsCommand(projects));
 	core.register(skillsCommand(skills));

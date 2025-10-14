@@ -150,5 +150,5 @@
 	autocapitalize="off"
 	autocomplete="off"
 	inputmode="text"
-	class="textarea-bordered caret- textarea h-full w-full resize-none overflow-auto border-none bg-base-300 p-4 font-mono text-sm leading-6 whitespace-pre text-base-content outline-none focus:border-none focus:outline-none"
+	class="textarea-bordered caret- textarea h-full w-full resize-none overflow-auto border-none bg-base-300 p-4 font-mono text-sm leading-6 whitespace-pre text-base-content opacity-70 outline-none focus:border-none focus:outline-none"
 ></textarea>

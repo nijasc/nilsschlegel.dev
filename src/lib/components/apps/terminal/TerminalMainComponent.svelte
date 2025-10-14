@@ -4,11 +4,21 @@
 	import { createTerminal } from '$lib/impl/terminal';
 	import TerminalView from './TerminalView.svelte';
 
+	const nilsAscii =
+		' _______  .__.__          \n' +
+		' \\      \\ |__|  |   ______ \n' +
+		' /   |   \\|  |  |  /  ___/ \n' +
+		'/    |    \\  |  |__\\___ \\  \n' +
+		'\\____|__  /__|____/____  > \n' +
+		'        \\/             \\/ ';
+
 	let { props }: { props: DefaultAppProps } = $props();
 	const terminal = createTerminal({
 		prefix: '$ visitor@nilsschlegel.dev -> ',
-		welcome: ['Welcome!', 'Type `help` to see commands'],
-		historyLimit: 300
+		welcome: [nilsAscii, 'Type `help` to see commands - me@nilsschlegel.dev'],
+		historyLimit: 300,
+		projects: [],
+		skills: []
 	});
 </script>
 
