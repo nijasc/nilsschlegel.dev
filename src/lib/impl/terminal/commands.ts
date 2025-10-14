@@ -216,3 +216,13 @@ export const calcCommand: TerminalCommand = {
 		}
 	}
 };
+
+export const exitCommand = (onClose: () => void): TerminalCommand => ({
+	name: 'exit',
+	description: 'Exit the terminal',
+	usage: 'exit',
+	handler: () => {
+		onClose()
+		return "Exit"
+	}
+});

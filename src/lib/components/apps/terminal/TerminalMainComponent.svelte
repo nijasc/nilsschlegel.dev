@@ -18,7 +18,8 @@
 		welcome: [nilsAscii, 'Type `help` to see commands - me@nilsschlegel.dev'],
 		historyLimit: 300,
 		projects: [],
-		skills: []
+		skills: [],
+		exit: () => props.onClose()
 	});
 </script>
 

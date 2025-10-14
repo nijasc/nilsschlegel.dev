@@ -17,7 +17,8 @@ import {
 	skillsCommand,
 	themeCommand,
 	pingCommand,
-	calcCommand
+	calcCommand,
+	exitCommand
 } from './commands';
 
 type Project = { name: string; url: string; desc: string };
@@ -27,6 +28,7 @@ export const createTerminal = (
 		socials?: ReadonlyArray<{ id: string; label: string; url: string }>;
 		projects?: ReadonlyArray<Project>;
 		skills?: ReadonlyArray<string>;
+		exit?: () => void;
 		setTheme?: (t: 'light' | 'dark') => void;
 	}
 ) => {
@@ -42,6 +44,11 @@ export const createTerminal = (
 				themeStore.setTheme(Theme.LIGHT);
 			}
 		});
+	const onExit = 
+		opts?.exit ??
+		(() => {
+			return
+		})
 
 	core.register(helpCommand(() => core.listCommands()));
 	core.register(echoCommand);
@@ -65,6 +72,7 @@ export const createTerminal = (
 	core.register(projectsCommand(projects));
 	core.register(skillsCommand(skills));
 	core.register(themeCommand(setTheme));
+	core.register(exitCommand(onExit))
 
 	return core;
 };
