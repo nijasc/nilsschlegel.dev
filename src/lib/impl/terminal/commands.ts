@@ -124,9 +124,14 @@ export const aboutCommand: TerminalCommand = {
 	handler: () =>
 		[
 			fmtTitle('about'),
-			'hi, I am Your Name',
-			'I build web experiences with type safety and performance',
-			'try: projects, skills, theme, joke, time'
+			'hi, I am Nils Schlegel',
+			'an apprentice software',
+			'developer in my third year',
+			'at Abacus Research AG.',
+			'I specialize in Kotlin',
+			'and Java, building backend',
+			'services with Spring Boot',
+			'and the custom Abacus framework .'
 		].join('\n')
 };
 
