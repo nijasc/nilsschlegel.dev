@@ -21,7 +21,7 @@
 		if (themeStore.getTheme() == Theme.DARK) {
 			darkMode = true;
 		} else {
-			darkMode = false
+			darkMode = false;
 		}
 	}
 

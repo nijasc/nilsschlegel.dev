@@ -44,11 +44,11 @@ export const createTerminal = (
 				themeStore.setTheme(Theme.LIGHT);
 			}
 		});
-	const onExit = 
+	const onExit =
 		opts?.exit ??
 		(() => {
-			return
-		})
+			return;
+		});
 
 	core.register(helpCommand(() => core.listCommands()));
 	core.register(echoCommand);
@@ -72,7 +72,7 @@ export const createTerminal = (
 	core.register(projectsCommand(projects));
 	core.register(skillsCommand(skills));
 	core.register(themeCommand(setTheme));
-	core.register(exitCommand(onExit))
+	core.register(exitCommand(onExit));
 
 	return core;
 };

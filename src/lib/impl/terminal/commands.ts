@@ -1,4 +1,5 @@
 import type { TerminalCommand } from '$lib/type/terminal/TerminalCommand';
+import { funny } from './funny';
 
 type Social = {
 	id: string;
@@ -210,7 +211,14 @@ export const calcCommand: TerminalCommand = {
 	usage: 'calc 2 * (3 + 4)',
 	handler: (args) => {
 		const input = args.join(' ').replace(/[^0-9+\-*/().% ]/g, '');
+
 		if (!input.trim()) return 'usage: calc <expression>';
+		const fInput = input.replaceAll(' ', '');
+		console.log(fInput);
+
+		if (fInput == '67' || fInput == '6+7' || fInput == '6*7' || fInput == '6/7') {
+			return funny;
+		}
 		try {
 			const f = new Function(`return (${input})`) as () => unknown;
 			const v = f();
@@ -227,7 +235,7 @@ export const exitCommand = (onClose: () => void): TerminalCommand => ({
 	description: 'Exit the terminal',
 	usage: 'exit',
 	handler: () => {
-		onClose()
-		return "Exit"
+		onClose();
+		return 'Exit';
 	}
 });
