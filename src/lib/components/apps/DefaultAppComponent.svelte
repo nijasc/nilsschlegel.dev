@@ -28,7 +28,7 @@
 			</button>
 		</div>
 	</div>
-	<div class="h-full w-full rounded-b-lg bg-base-100/90">
+	<div class="h-full max-h-full w-full overflow-y-auto rounded-b-lg bg-base-100/90">
 		{@render children()}
 	</div>
 </div>

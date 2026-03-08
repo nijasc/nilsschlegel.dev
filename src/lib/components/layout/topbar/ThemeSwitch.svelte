@@ -2,7 +2,7 @@
 	import { MoonIcon, SunIcon } from 'lucide-svelte';
 	import { themeStore } from '$lib/store/themeStore';
 	import { onMount } from 'svelte';
-	import { Theme } from '$lib/type/Theme';
+	import { Theme } from '$lib/type/application/Theme';
 
 	let darkMode = $state(true);
 

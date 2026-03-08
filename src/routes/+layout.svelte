@@ -8,7 +8,7 @@
 
 	import { themeStore } from '$lib/store/themeStore';
 	import { onMount } from 'svelte';
-	import { Theme } from '$lib/type/Theme';
+	import { Theme } from '$lib/type/application/Theme';
 
 	const LIGHT_CLASS = 'corporate';
 	const DARK_CLASS = 'business';

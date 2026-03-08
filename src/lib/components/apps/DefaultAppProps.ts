@@ -1,4 +1,4 @@
-import type { Application } from '$lib/type/Application';
+import type { Application } from '$lib/type/application/Application';
 import type { Snippet } from 'svelte';
 
 export interface DefaultAppProps {

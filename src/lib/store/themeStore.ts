@@ -1,4 +1,4 @@
-import { Theme } from '$lib/type/Theme';
+import { Theme } from '$lib/type/application/Theme';
 
 const THEME_KEY = 'theme';
 const DEFAULT_THEME = Theme.DARK;

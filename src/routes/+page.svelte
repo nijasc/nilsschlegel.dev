@@ -2,7 +2,7 @@
 	import type { DefaultAppProps } from '$lib/components/apps/DefaultAppProps';
 	import Toolbar from '$lib/components/layout/Toolbar.svelte';
 	import Topbar from '$lib/components/layout/topbar/Topbar.svelte';
-	import type { Application } from '$lib/type/Application';
+	import type { Application } from '$lib/type/application/Application';
 
 	let currentApp: Application | null = $state(null);
 
@@ -34,7 +34,7 @@
 	}
 </script>
 
-<Topbar />
+<Topbar openAppName={currentApp?.name} />
 
 {#if currentApp}
 	{@const App = currentApp.component}

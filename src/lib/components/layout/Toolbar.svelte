@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { apps } from '$lib/config/apps.config';
-	import type { Application } from '$lib/type/Application';
+	import type { Application } from '$lib/type/application/Application';
 
 	let { onAppChange }: { onAppChange: (app: Application | null) => void } = $props();
 

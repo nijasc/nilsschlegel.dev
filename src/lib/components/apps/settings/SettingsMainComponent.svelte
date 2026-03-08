@@ -3,7 +3,7 @@
 	import { onMount } from 'svelte';
 	import DefaultAppComponent from '../DefaultAppComponent.svelte';
 	import type { DefaultAppProps } from '../DefaultAppProps';
-	import { Theme } from '$lib/type/Theme';
+	import { Theme } from '$lib/type/application/Theme';
 
 	let darkMode = $state(false);
 

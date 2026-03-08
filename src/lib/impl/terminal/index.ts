@@ -1,5 +1,5 @@
 import { themeStore } from '$lib/store/themeStore';
-import { Theme } from '$lib/type/Theme';
+import { Theme } from '$lib/type/application/Theme';
 import type { TerminalOptions } from '$lib/type/terminal/TerminalOptions';
 import { TerminalCore } from './TerminalCore';
 import {

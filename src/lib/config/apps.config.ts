@@ -2,7 +2,7 @@ import BrowserMainComponent from '$lib/components/apps/browser/BrowserMainCompon
 import SettingsMainComponent from '$lib/components/apps/settings/SettingsMainComponent.svelte';
 import SpotifyMainComponent from '$lib/components/apps/spotify/SpotifyMainComponent.svelte';
 import TerminalMainComponent from '$lib/components/apps/terminal/TerminalMainComponent.svelte';
-import type { Application } from '$lib/type/Application';
+import type { Application } from '$lib/type/application/Application';
 import { ChromeIcon, MusicIcon, SettingsIcon, TerminalIcon } from 'lucide-svelte';
 
 export const apps: Application[] = [
