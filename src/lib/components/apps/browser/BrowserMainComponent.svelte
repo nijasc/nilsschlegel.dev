@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { pages } from '$lib/config/browser/pages.config';
 	import type { Page } from '$lib/type/browser/Page';
-	import { ArrowLeft, ArrowRight, RefreshCwIcon } from 'lucide-svelte';
+	import { ArrowLeft, ArrowRight, RefreshCw, Search } from 'lucide-svelte';
 	import DefaultAppComponent from '../DefaultAppComponent.svelte';
 	import type { DefaultAppProps } from '../DefaultAppProps';
 
@@ -12,8 +12,8 @@
 	let historyIndex: number = $state(-1);
 	let searchInput: string = $state('');
 	let forwardEnabled: boolean = $state(false);
-	let notFound: { active: boolean; text: string } = $state({ active: false, text: '' });
 	let backEnabled: boolean = $state(false);
+	let notFound: { active: boolean; text: string } = $state({ active: false, text: '' });
 
 	function handleTabChange(page: Page | null) {
 		if (!page) {
@@ -29,110 +29,104 @@
 	}
 
 	function handleForward() {
-		if (forwardEnabled) {
-			historyIndex += 1;
-			currentPage = pageHistory[historyIndex] ?? null;
-		}
+		if (!forwardEnabled) return;
+		historyIndex += 1;
+		currentPage = pageHistory[historyIndex] ?? null;
 	}
 
 	function handleBack() {
-		if (backEnabled) {
-			historyIndex -= 1;
-			currentPage = pageHistory[historyIndex] ?? null;
-		}
+		if (!backEnabled) return;
+		historyIndex -= 1;
+		currentPage = pageHistory[historyIndex] ?? null;
 	}
 
 	function handleSearch() {
-		for (const page of pages) {
-			notFound = { active: false, text: `` };
-			if (
-				page.link.toLocaleLowerCase() === searchInput.toLocaleLowerCase() ||
-				page.name.toLocaleLowerCase() === searchInput.toLocaleLowerCase()
-			) {
-				handleTabChange(page);
-				return;
-			} else if (searchInput === '') {
-				handleTabChange(null);
-			} else {
-				notFound = { active: true, text: `Could not find ${searchInput}` };
-				handleTabChange(null);
-			}
+		if (searchInput === '') {
+			handleTabChange(null);
+			notFound = { active: false, text: '' };
+			return;
+		}
+		const match = pages.find(
+			(p) =>
+				p.link.toLocaleLowerCase() === searchInput.toLocaleLowerCase() ||
+				p.name.toLocaleLowerCase() === searchInput.toLocaleLowerCase()
+		);
+		if (match) {
+			notFound = { active: false, text: '' };
+			handleTabChange(match);
+		} else {
+			notFound = { active: true, text: searchInput };
+			handleTabChange(null);
 		}
 	}
 
 	function handleReload() {
-		const lastPage = currentPage;
+		const last = currentPage;
 		currentPage = null;
-		currentPage = lastPage;
-	}
-
-	function hasForward() {
-		forwardEnabled = historyIndex < pageHistory.length - 1;
-	}
-
-	function hasBack() {
-		backEnabled = historyIndex > 0;
+		currentPage = last;
 	}
 
 	$effect(() => {
-		hasBack();
-		hasForward();
-		if (currentPage) {
-			searchInput = currentPage?.link;
-		}
+		backEnabled = historyIndex > 0;
+		forwardEnabled = historyIndex < pageHistory.length - 1;
+		if (currentPage) searchInput = currentPage.link;
 	});
 </script>
 
 <DefaultAppComponent {props}>
 	<div class="flex h-full w-full flex-col">
-		<div class="sticky top-10 z-30 border-b border-base-300 bg-base-100/95 px-3 py-2 backdrop-blur">
+		<div class="shrink-0 border-b border-base-300 bg-base-200 px-3 py-2">
 			<div class="flex items-center gap-2">
-				<div class="join">
+				<div class="flex gap-1">
 					<button
 						disabled={!backEnabled}
-						onclick={() => handleBack()}
-						class="btn join-item btn-sm"
+						onclick={handleBack}
+						class="flex h-7 w-7 items-center justify-center rounded-lg transition-colors hover:bg-base-300 disabled:opacity-30"
 						aria-label="Back"
 					>
-						<ArrowLeft size="12" />
+						<ArrowLeft size={14} />
 					</button>
 					<button
 						disabled={!forwardEnabled}
-						onclick={() => handleForward()}
-						class="btn join-item btn-sm"
+						onclick={handleForward}
+						class="flex h-7 w-7 items-center justify-center rounded-lg transition-colors hover:bg-base-300 disabled:opacity-30"
 						aria-label="Forward"
 					>
-						<ArrowRight size="12" />
+						<ArrowRight size={14} />
 					</button>
-					<button onclick={() => handleReload()} class="btn join-item btn-sm" aria-label="Refresh">
-						<RefreshCwIcon size="12" />
+					<button
+						onclick={handleReload}
+						class="flex h-7 w-7 items-center justify-center rounded-lg transition-colors hover:bg-base-300"
+						aria-label="Reload"
+					>
+						<RefreshCw size={14} />
 					</button>
 				</div>
-				<input
-					class="input input-sm w-full border focus:border-primary focus:outline-none"
-					type="text"
-					onkeydown={(event) => {
-						if (event.key === 'Enter') {
-							handleSearch();
-						}
-					}}
-					bind:value={searchInput}
-					placeholder="Search or enter address"
-				/>
-				<button onclick={() => handleSearch()} class="btn btn-sm btn-primary">Go</button>
+
+				<div class="relative flex flex-1 items-center">
+					<Search size={13} class="absolute left-2.5 text-base-content/40" />
+					<input
+						type="text"
+						bind:value={searchInput}
+						onkeydown={(e) => e.key === 'Enter' && handleSearch()}
+						placeholder="Search or enter address"
+						class="input input-sm w-full rounded-lg border border-base-300 bg-base-100 pl-8 text-sm focus:border-primary focus:outline-none"
+					/>
+				</div>
+
+				<button onclick={handleSearch} class="btn rounded-lg btn-sm btn-primary">Go</button>
 			</div>
 		</div>
 
-		<div
-			class="sticky top-[calc(2.5rem+2.5rem)] z-20 border-b border-base-300 bg-base-100/95 px-3 py-2 backdrop-blur"
-		>
-			<div class="tabs-boxed tabs w-full overflow-x-auto">
+		<div class="shrink-0 border-b border-base-300 bg-base-200/60 px-3">
+			<div class="flex gap-1 overflow-x-auto py-1.5">
 				{#each pages as page (page.link)}
 					<button
-						class="tab whitespace-nowrap"
-						class:tab-active={currentPage?.link === page.link}
 						onclick={() => handleTabChange(page)}
-						title={page.name}
+						class="rounded-md px-3 py-1 text-sm whitespace-nowrap transition-colors
+							{currentPage?.link === page.link
+							? 'bg-base-100 font-medium text-base-content shadow-sm'
+							: 'text-base-content/50 hover:bg-base-300 hover:text-base-content'}"
 					>
 						{page.name}
 					</button>
@@ -141,31 +135,29 @@
 		</div>
 
 		<div class="min-h-0 flex-1 overflow-auto">
-			<div class="p-4">
-				{#if currentPage}
-					{@const Content = currentPage.content}
-
-					<div class="mt-8">
-						<Content />
-					</div>
-				{:else if notFound.active}
-					<div class="prose max-w-none text-base-content/70">
-						<h3>Not Found!</h3>
-						<p>Could not find page {notFound.text}, try the following options:</p>
-						<ul>
-							<li>Click a tab from above</li>
-							<li>Enter the name or address of a page and try again</li>
-						</ul>
-					</div>
-				{:else}
-					<div class="flex h-64 w-full items-center justify-center text-center">
-						<div class="prose max-w-none text-base-content/70">
-							<h3>Welcome</h3>
-							<p>Select a tab above to view its content.</p>
-						</div>
-					</div>
-				{/if}
-			</div>
+			{#if currentPage}
+				{@const Content = currentPage.content}
+				<div class="p-6">
+					<Content />
+				</div>
+			{:else if notFound.active}
+				<div
+					class="flex h-full min-h-64 flex-col items-center justify-center gap-2 p-8 text-center"
+				>
+					<p class="text-lg font-semibold text-base-content">Page not found</p>
+					<p class="text-sm text-base-content/50">
+						No page matching <span class="font-medium text-base-content/70">"{notFound.text}"</span>
+						— try a tab above or enter a valid address.
+					</p>
+				</div>
+			{:else}
+				<div
+					class="flex h-full min-h-64 flex-col items-center justify-center gap-2 p-8 text-center"
+				>
+					<p class="text-lg font-semibold text-base-content">Welcome</p>
+					<p class="text-sm text-base-content/50">Select a tab above to get started.</p>
+				</div>
+			{/if}
 		</div>
 	</div>
 </DefaultAppComponent>
