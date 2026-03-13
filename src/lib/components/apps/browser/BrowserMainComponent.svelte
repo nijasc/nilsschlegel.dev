@@ -144,7 +144,10 @@
 			<div class="p-4">
 				{#if currentPage}
 					{@const Content = currentPage.content}
-					<Content />
+
+					<div class="mt-8">
+						<Content />
+					</div>
 				{:else if notFound.active}
 					<div class="prose max-w-none text-base-content/70">
 						<h3>Not Found!</h3>
@@ -155,9 +158,11 @@
 						</ul>
 					</div>
 				{:else}
-					<div class="prose max-w-none text-base-content/70">
-						<h3>Welcome</h3>
-						<p>Select a tab above to view its content.</p>
+					<div class="flex h-64 w-full items-center justify-center text-center">
+						<div class="prose max-w-none text-base-content/70">
+							<h3>Welcome</h3>
+							<p>Select a tab above to view its content.</p>
+						</div>
 					</div>
 				{/if}
 			</div>

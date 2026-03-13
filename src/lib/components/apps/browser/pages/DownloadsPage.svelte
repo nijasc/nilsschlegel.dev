@@ -1,80 +1,81 @@
-<script lang="ts"></script>
+<script lang="ts">
+	import { Download } from 'lucide-svelte';
 
-<section class="flex flex-col gap-8">
-	<div class="navbar rounded-box bg-base-100 shadow">
-		<div class="flex-1">
-			<span class="text-xl font-semibold">Downloads</span>
+	const downloads = [
+		{
+			title: 'CV',
+			description: 'Concise overview of experience, skills, and education.',
+			href: '/downloads/cv.pdf',
+			label: 'Download CV',
+			tag: 'PDF'
+		},
+		{
+			title: 'Certificates',
+			description: 'Verified certifications and achievements bundled together.',
+			href: '/downloads/certificates.pdf',
+			label: 'Download',
+			tag: 'PDF'
+		}
+	];
+
+	const included = [
+		'Latest CV with role highlights and tools used',
+		'Certificates with dates and issuing organizations',
+		'Consistent formatting and accessible structure'
+	];
+</script>
+
+<section class="flex flex-col gap-12 px-1 py-4">
+	<div class="flex items-end justify-between border-b border-base-300 pb-6">
+		<div>
+			<p class="mb-1 text-sm font-medium tracking-widest text-primary uppercase">Resources</p>
+			<h1 class="text-4xl font-bold tracking-tight text-base-content">Downloads</h1>
 		</div>
-		<div class="flex-none">
-			<a href="/downloads/all-materials.zip" download class="btn btn-primary"> Download All </a>
-		</div>
+		<a href="/downloads/all-materials.zip" download class="btn gap-2 btn-primary">
+			<Download class="h-4 w-4" />
+			Download All
+		</a>
 	</div>
 
-	<div class="grid gap-6 md:grid-cols-3">
-		<div class="card border border-base-300 bg-base-100">
-			<div class="card-body">
-				<h2 class="card-title">CV</h2>
-				<p class="text-base-content/80">A concise overview of experience, skills, and education.</p>
-				<div class="card-actions items-center justify-between pt-2">
-					<div class="badge badge-outline badge-primary">PDF</div>
-					<a href="/downloads/cv.pdf" download class="btn btn-sm btn-primary"> Get CV </a>
+	<div class="grid gap-4 md:grid-cols-2">
+		{#each downloads as item}
+			<div
+				class="group flex flex-col justify-between gap-6 rounded-2xl border border-base-300 bg-base-100 p-6 transition-shadow hover:shadow-md"
+			>
+				<div class="flex flex-col gap-2">
+					<div class="flex items-center justify-between">
+						<h2 class="text-lg font-semibold text-base-content">{item.title}</h2>
+						<span
+							class="rounded-md border border-base-300 bg-base-200 px-2 py-0.5 text-xs font-medium text-base-content/60"
+						>
+							{item.tag}
+						</span>
+					</div>
+					<p class="text-sm leading-relaxed text-base-content/60">{item.description}</p>
 				</div>
-			</div>
-		</div>
-
-		<div class="card border border-base-300 bg-base-100">
-			<div class="card-body">
-				<h2 class="card-title">Certificates</h2>
-				<p class="text-base-content/80">
-					Verified certifications and achievements bundled together.
-				</p>
-				<div class="card-actions items-center justify-between pt-2">
-					<div class="badge badge-outline badge-secondary">ZIP</div>
-					<a href="/downloads/certificates.zip" download class="btn btn-sm btn-secondary">
-						Get Certificates
-					</a>
-				</div>
-			</div>
-		</div>
-
-		<div class="card border border-base-300 bg-base-100">
-			<div class="card-body">
-				<h2 class="card-title">Motivation Letter</h2>
-				<p class="text-base-content/80">A tailored letter highlighting interests and fit.</p>
-				<div class="card-actions items-center justify-between pt-2">
-					<div class="badge badge-outline badge-accent">PDF</div>
-					<a href="/downloads/motivation-letter.pdf" download class="btn btn-sm btn-accent">
-						Get Letter
-					</a>
-				</div>
-			</div>
-		</div>
-	</div>
-
-	<div class="collapse-arrow collapse rounded-box bg-base-200">
-		<input type="checkbox" />
-		<div class="collapse-title text-lg font-medium">What?s included in the full package?</div>
-		<div class="collapse-content">
-			<ul class="ml-5 list-disc space-y-1 text-base-content/80">
-				<li>Latest CV with role highlights and tools used</li>
-				<li>Certificates with dates and issuing organizations</li>
-				<li>Motivation letter as a printable PDF</li>
-				<li>Consistent formatting and accessible structure</li>
-			</ul>
-			<div class="pt-4">
-				<a href="/downloads/all-materials.zip" download class="btn btn-outline">
-					Download Everything
+				<a
+					href={item.href}
+					download
+					class="btn w-fit gap-2 transition-colors btn-outline btn-sm group-hover:btn-primary"
+				>
+					<Download class="h-3.5 w-3.5" />
+					{item.label}
 				</a>
 			</div>
-		</div>
+		{/each}
 	</div>
 
-	<div class="join self-start">
-		<a href="/downloads/cv.pdf" download class="btn join-item">CV</a>
-		<a href="/downloads/certificates.zip" download class="btn join-item"> Certificates </a>
-		<a href="/downloads/motivation-letter.pdf" download class="btn join-item">
-			Motivation Letter
-		</a>
-		<a href="/downloads/all-materials.zip" download class="btn join-item btn-primary"> All </a>
+	<div class="rounded-2xl border border-base-300 bg-base-100 p-6">
+		<p class="mb-4 text-sm font-medium tracking-widest text-base-content/50 uppercase">
+			What's included
+		</p>
+		<ul class="space-y-2">
+			{#each included as item}
+				<li class="flex items-start gap-3 text-sm text-base-content/70">
+					<span class="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-primary"></span>
+					{item}
+				</li>
+			{/each}
+		</ul>
 	</div>
 </section>

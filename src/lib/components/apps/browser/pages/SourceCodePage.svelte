@@ -1,83 +1,100 @@
 <script lang="ts">
-	import { GithubIcon, StarIcon, BookOpenIcon } from 'lucide-svelte';
+	import { Github, Star, BookOpen } from 'lucide-svelte';
+
+	const stats = [
+		{
+			title: 'Tech Stack',
+			value: 'Svelte',
+			desc: 'Modern, fast, and minimal',
+			color: 'text-primary'
+		},
+		{ title: 'License', value: 'MIT', desc: 'Open and permissive', color: 'text-secondary' },
+		{ title: 'Contribute', value: 'PRs', desc: 'Issues and ideas welcome', color: 'text-accent' }
+	];
+
+	const highlights = [
+		'Reusable UI components styled with Tailwind and daisyUI',
+		'Project structure and patterns for clean Svelte apps',
+		'Config, scripts, and tooling for a smooth DX',
+		'Examples for accessibility and responsive design'
+	];
+
+	const actions = [
+		{
+			href: 'https://github.com/nijasc/nilsschlegel.dev',
+			icon: Github,
+			label: 'View on GitHub',
+			style: 'btn-primary'
+		},
+		{
+			href: 'https://github.com/nijasc/nilsschlegel.dev/stargazers',
+			icon: Star,
+			label: 'Star the Repo',
+			style: 'btn-outline'
+		},
+		{
+			href: 'https://github.com/nijasc/nilsschlegel.dev#readme',
+			icon: BookOpen,
+			label: 'Read the README',
+			style: 'btn-ghost'
+		}
+	];
 </script>
 
-<div class="flex flex-col gap-6">
-	<div class="hero rounded-box bg-base-200">
-		<div class="hero-content text-center">
-			<div class="max-w-xl">
-				<h1 class="text-3xl font-bold">Source Code</h1>
-				<p class="py-4 text-base-content/80">
-					I love building in the open. Explore the codebase behind this website, learn from it,
-					suggest improvements, or use parts of it in your own projects. Contributions are welcome.
-				</p>
-				<div class="flex flex-wrap items-center justify-center gap-3">
-					<a
-						target="_blank"
-						href="https://github.com/nijasc/nilsschlegel.dev"
-						class="btn gap-2 btn-primary"
-					>
-						<GithubIcon size={18} />
-						<span>View on GitHub</span>
-					</a>
-					<a
-						target="_blank"
-						href="https://github.com/nijasc/nilsschlegel.dev/stargazers"
-						class="btn gap-2 btn-outline"
-					>
-						<StarIcon size={18} />
-						<span>Star the Repo</span>
-					</a>
-					<a
-						target="_blank"
-						href="https://github.com/nijasc/nilsschlegel.dev#readme"
-						class="btn gap-2 btn-ghost"
-					>
-						<BookOpenIcon size={18} />
-						<span>Read the README</span>
-					</a>
-				</div>
-			</div>
+<section class="flex flex-col gap-12 px-1 py-4">
+	<div class="flex items-end justify-between border-b border-base-300 pb-6">
+		<div>
+			<p class="mb-1 text-sm font-medium tracking-widest text-primary uppercase">Open Source</p>
+			<h1 class="text-4xl font-bold tracking-tight text-base-content">Source Code</h1>
 		</div>
+		<a
+			href="https://github.com/nijasc/nilsschlegel.dev"
+			target="_blank"
+			class="btn gap-2 btn-primary"
+		>
+			<Github class="h-4 w-4" />
+			GitHub
+		</a>
 	</div>
 
-	<div class="stats stats-vertical bg-base-100 shadow sm:stats-horizontal">
-		<div class="stat">
-			<div class="stat-title">Tech Stack</div>
-			<div class="stat-value text-2xl text-primary">Svelte</div>
-			<div class="stat-desc">Modern, fast, and minimal</div>
-		</div>
-		<div class="stat">
-			<div class="stat-title">License</div>
-			<div class="stat-value text-2xl text-secondary">MIT</div>
-			<div class="stat-desc">Open and permissive</div>
-		</div>
-		<div class="stat">
-			<div class="stat-title">Issues & Ideas</div>
-			<div class="stat-value text-2xl text-accent">Contribute</div>
-			<div class="stat-desc">PRs are encouraged</div>
-		</div>
-	</div>
-
-	<div class="card bg-base-100 shadow">
-		<div class="card-body">
-			<h2 class="card-title">What you?ll find</h2>
-			<ul class="ml-5 list-disc space-y-1 text-base-content/80">
-				<li>Reusable UI components styled with Tailwind and daisyUI</li>
-				<li>Project structure and patterns for clean Svelte apps</li>
-				<li>Config, scripts, and tooling for a smooth DX</li>
-				<li>Examples for accessibility and responsive design</li>
-			</ul>
-			<div class="card-actions justify-end">
-				<a
-					target="_blank"
-					href="https://github.com/nijasc/nilsschlegel.dev"
-					class="btn btn-primary"
-				>
-					<GithubIcon size={18} />
-					<span>Browse Repository</span>
+	<div class="rounded-2xl border border-base-300 bg-base-100 p-6">
+		<p class="mb-2 leading-relaxed text-base-content/70">
+			I love building in the open. Explore the codebase, learn from it, suggest improvements, or use
+			parts of it in your own projects.
+		</p>
+		<div class="mt-5 flex flex-wrap gap-3">
+			{#each actions as action}
+				<a href={action.href} target="_blank" class="btn gap-2 btn-sm {action.style}">
+					<action.icon class="h-4 w-4" />
+					{action.label}
 				</a>
-			</div>
+			{/each}
 		</div>
 	</div>
-</div>
+
+	<div class="grid gap-4 sm:grid-cols-3">
+		{#each stats as stat}
+			<div class="rounded-2xl border border-base-300 bg-base-100 p-5">
+				<p class="text-xs font-medium tracking-widest text-base-content/40 uppercase">
+					{stat.title}
+				</p>
+				<p class="mt-2 text-2xl font-bold {stat.color}">{stat.value}</p>
+				<p class="mt-1 text-sm text-base-content/60">{stat.desc}</p>
+			</div>
+		{/each}
+	</div>
+
+	<div class="rounded-2xl border border-base-300 bg-base-100 p-6">
+		<p class="mb-4 text-sm font-medium tracking-widest text-base-content/50 uppercase">
+			What you'll find
+		</p>
+		<ul class="space-y-2">
+			{#each highlights as item}
+				<li class="flex items-start gap-3 text-sm text-base-content/70">
+					<span class="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-primary"></span>
+					{item}
+				</li>
+			{/each}
+		</ul>
+	</div>
+</section>
